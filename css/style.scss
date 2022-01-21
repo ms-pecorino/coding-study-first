@@ -1,0 +1,323 @@
+@charset "UTF-8";
+
+/*変数：ブレイクポイント*/
+$brake1: 767px;
+$brake2: 1024px;
+@mixin brake1 {
+  @media (max-width: ($brake1)) {
+    @content;
+  }
+}
+@mixin brake2 {
+  @media (max-width: ($brake2)) {
+    @content;
+  }
+}
+
+/*変数：カラー*/
+$color1: #333333;
+$color2: #eeeeee;
+$color3: #83032a;
+
+/*共通*/
+html {
+  font-size: 62.5%;
+}
+body {
+  font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+  color: $color1;
+  a {
+    display: block;
+    color: $color1;
+    transition: all 0.2s ease-out;
+    &:hover {
+      opacity: 0.4;
+    }
+  }
+}
+.inner {
+  max-width: 980px;
+  margin: 0 auto;
+}
+.sec-title {
+  margin-bottom: 50px;
+  line-height: 1.5;
+  font-size: 3.2rem;
+  font-weight: bold;
+  text-align: center;
+}
+.white {
+  color: #fff;
+}
+
+/*header*/
+header {
+  .inner {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    @include brake2 {
+      padding: 20px 15px 20px 15px;
+    }
+    .header-left {
+      width: 179px;
+    }
+    .header-right {
+      display: flex;
+      align-items: center;
+      @include brake1 {
+        display: none;
+      }
+      li {
+        margin-left: 20px;
+        &:first-child {
+          margin-left: 0;
+        }
+        a {
+          font-size: 1.6rem;
+        }
+      }
+    }
+    .hbg-button {
+      display: none;
+      @include brake1 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+        z-index: 2;
+        &.active span::before {
+          transform: rotate(-225deg);
+          top: 0;
+        }
+        &.active span::after {
+          transform: rotate(225deg);
+          top: 0;
+        }
+        span {
+          position: relative;
+        }
+        span,
+        span::before,
+        span::after {
+          width: 30px;
+          height: 2px;
+          background-color: $color1;
+        }
+        span::before,
+        span::after {
+          content: "";
+          display: block;
+          position: absolute;
+          transition: all 0.3s ease-out;
+        }
+        span::before {
+          top: -10px;
+          transition: all 0.4s ease-out;
+        }
+        span::after {
+          top: 10px;
+          transition: all 0.4s ease-out;
+        }
+      }
+    }
+  }
+}
+
+.sp-menu{
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(225, 225, 225, .95);
+  padding: 100px 75px;
+  z-index: 1;
+}
+
+main {
+  .mv {
+    position: relative;
+    margin-bottom: 60px;
+    img {
+      width: 100%;
+      height: 551px;
+      object-fit: cover;
+    }
+    .mv-txt {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      @include brake1 {
+        transform: translate(-50%, -50%);
+      }
+      h2 {
+        line-height: 1.2;
+        font-size: 3.6rem;
+        font-weight: bold;
+        color: #fff;
+        @include brake1 {
+          margin-bottom: 20px;
+        }
+        .sp-br {
+          display: none;
+          @include brake1 {
+            display: block;
+          }
+        }
+      }
+      span {
+        display: block;
+        font-size: 1.6rem;
+        font-weight: bold;
+        color: #fff;
+      }
+    }
+  }
+  .sec1 {
+    margin-bottom: 88px;
+    .inner {
+      @include brake2 {
+        padding: 0 20px;
+      }
+      @include brake1 {
+        padding: 0 15px;
+      }
+      .sec1__cont {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 46px;
+        @include brake1 {
+          display: block;
+        }
+        .sec1__list {
+          max-width: 310px;
+          width: 31.6%;
+          box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.1);
+          @include brake1 {
+            max-width: none;
+            min-width: 310px;
+            width: 100%;
+            margin: 0 auto;
+            margin-bottom: 30px;
+          }
+          .sec1__list__img {
+            width: 100%;
+            height: 54%;
+            object-fit: cover;
+          }
+          .sec1__list__txt {
+            position: relative;
+            width: 100%;
+            height: 168px;
+            padding: 20px;
+            p {
+              font-size: 1.8rem;
+              line-height: 1.5;
+              letter-spacing: -0.05rem;
+              font-weight: bold;
+              @include brake2 {
+                font-size: 1.6rem;
+              }
+            }
+            span {
+              display: block;
+              position: absolute;
+              left: 20px;
+              bottom: 20px;
+              font-size: 1.6rem;
+              @include brake2 {
+                font-size: 1.4rem;
+              }
+            }
+          }
+        }
+      }
+      .sec1__button {
+        display: block;
+        width: 310px;
+        height: 52px;
+        margin: 0 auto;
+        @include brake1 {
+          width: 100%;
+        }
+        a {
+          height: 100%;
+          line-height: 52px;
+          font-size: 1.8rem;
+          font-weight: bold;
+          border: 1px solid $color2;
+          box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.1);
+        }
+      }
+    }
+  }
+  .sec2 {
+    text-align: center;
+    color: #ffffff;
+    .inner {
+      max-width: none;
+      width: 100%;
+      padding: 60px 15px 45px 15px;
+      background-image: url("../img/tim-bogdanov-4uojMEdcwI8-unsplash.png");
+      background-position: center;
+      background-size: cover;
+      p {
+        margin-bottom: 50px;
+        font-size: 1.6rem;
+        line-height: 1.8;
+        font-weight: bold;
+        @include brake1 {
+          font-size: 1.4rem;
+        }
+      }
+      .contact-btn {
+        display: block;
+        margin: 0 auto;
+        width: 210px;
+        height: 54px;
+        @include brake1 {
+          width: 100%;
+          max-width: 345px;
+        }
+        a {
+          height: 100%;
+          position: relative;
+          height: 100%;
+          font-size: 1.6rem;
+          font-weight: bold;
+
+          line-height: 54px;
+          background-color: $color3;
+          font-weight: bold;
+          color: #fff;
+        }
+      }
+    }
+  }
+}
+
+/*footer*/
+footer {
+  text-align: center;
+  background-color: $color1;
+  color: #fff;
+  .inner {
+    max-width: none;
+    width: 100%;
+    padding: 32px 15px;
+    p {
+      font-size: 1.4rem;
+      @include brake1 {
+        font-size: 1.2rem;
+      }
+    }
+  }
+}
